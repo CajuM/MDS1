@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name="ro.unibuc.fmi.my.mds1.DexLexem" table="lexem">
+      <meta attribute="class-description">
+	 This class contains lexems from DEX
+      </meta>
+      <id name="id" type="int" column="id">
+         <generator class="native"/>
+      </id>
+      <property name="lexem" column="lexem" type="string"/>
+      <set
+	      name="definitions"
+	      table="lexem_definition"
+	      inverse="false"
+	      lazy="true"
+	      fetch="select"
+	      cascade="all">
+	      <key>
+		<column name="ilexem_id" not-null="true" />
+	      </key>
+	      <many-to-many entity-name="ro.unibuc.fmi.my.mds1.DexDefinition">
+		      <column name="definition_id" not-null="true" />
+	      </many-to-many>
+      </set>
+   </class>
+</hibernate-mapping>
