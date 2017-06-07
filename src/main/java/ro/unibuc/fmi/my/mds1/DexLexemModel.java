@@ -32,6 +32,24 @@ public class DexLexemModel {
 		return ret;
 	}
 
+	public static String getRandom() {
+		Session session = Main.getSession();
+
+		long count = (Long) session.createQuery(
+			"select count(*) " +
+			"from DexLexem as lexem" 
+		).uniqueResult();
+		
+		Query q2 = session.createQuery(
+			"select lexem " +
+			"from DexLexem as lexem"
+		);
+		q2.setFirstResult((int) (count * Math.random()));
+		q2.setMaxResults(1);
+
+		return ((DexLexem) q2.uniqueResult()).lexem;
+	}
+
 	public static Character recommendLetter(List<DexLexem> lexemList, String pattern) {
 		List<Integer> indexes = new ArrayList<Integer>();
 		for (int i = 0; i < pattern.length(); i++) {
