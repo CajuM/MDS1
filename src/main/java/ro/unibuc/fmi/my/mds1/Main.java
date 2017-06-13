@@ -31,7 +31,7 @@ public class Main {
                 	.configure()
 		        .build();
 
-        	Main.sessionFactory = new MetadataSources( registry ).buildMetadata().buildSessionFactory();
+        	Main.sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
 
 		SpringApplication.run(Main.class, args);
 	}
