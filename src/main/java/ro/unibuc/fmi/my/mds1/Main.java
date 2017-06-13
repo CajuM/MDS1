@@ -23,14 +23,6 @@ public class Main {
 	}
 
 	public static void main(String[] args) throws Exception {
-		Main.APP_HOME = Paths.get(
-			Main.class
-			.getProtectionDomain()
-			.getCodeSource()
-			.getLocation()
-			.toString()
-		).getParent().getParent();
-
 		Properties props = System.getProperties();
 		props.setProperty("hibernate.connection.url", System.getenv("JDBC_DATABASE_URL"));
 
