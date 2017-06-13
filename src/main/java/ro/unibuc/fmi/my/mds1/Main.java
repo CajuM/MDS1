@@ -16,9 +16,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class Main {
-	public static Path APP_HOME;
-	public static Path DB_PATH;
-
 	private static SessionFactory sessionFactory;
 
 	static Session getSession() {
@@ -34,13 +31,8 @@ public class Main {
 			.toString()
 		).getParent().getParent();
 
-		Main.DB_PATH = Main.APP_HOME
-			.resolve("data")
-			.resolve("dex");
-
 		Properties props = System.getProperties();
-		String jdbcUrl = String.format("jdbc:h2:%s", Main.DB_PATH.toString());
-		props.setProperty("hibernate.connection.url", jdbcUrl);
+		props.setProperty("hibernate.connection.url", System.getenv("JDBC_DATABASE_URL"));
 
 		final StandardServiceRegistry registry =
 			new StandardServiceRegistryBuilder()
